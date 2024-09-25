@@ -1,5 +1,5 @@
-const express=require('express');
-const app=express();
+const app=require('./app')
+
 const http=require('http')
 
 const server=http.createServer(app);
@@ -10,8 +10,8 @@ const io=require('socket.io')(server,{
 })
 
 io.on("connection", (socket) => {
-    console.log("whats socket",socket);
     console.log("socket is active to be connected");
+
     socket.on("chat",(payload)=>{
         console.log('whats payload',payload);
         io.emit('chat',payload)
