@@ -1,6 +1,12 @@
 const app=require('./app')
-
+const mongoose=require('mongoose');
 const http=require('http')
+
+mongoose.connect("mongodb://127.0.0.1:27017/Evo-Chat")
+.then(()=>console.log('db conected'))
+.catch((err)=>console.log(err))
+
+
 
 const server=http.createServer(app);
 const io=require('socket.io')(server,{

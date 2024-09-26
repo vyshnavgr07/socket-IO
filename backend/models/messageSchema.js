@@ -2,12 +2,12 @@ const mongoose=require('mongoose')
 
 const messageSchema=mongoose.Schema({
     sender:{
-        userId:mongoose.Schema.Types.ObjectId,
+        type:mongoose.Schema.Types.ObjectId,
         ref:'User'
-    },
-
+    },                                                     
+                                                                 
    reciever:{
-        userId:mongoose.Schema.Types.ObjectId,
+        type:mongoose.Schema.Types.ObjectId,
         ref:'User'
     },
     messages:{

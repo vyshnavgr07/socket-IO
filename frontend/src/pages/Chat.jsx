@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import SidebarUsers from '../components/SidebarUsers';
+import axios from 'axios';
 
 const Chat = () => {
   const [messages, setMessages] = useState([
@@ -6,6 +8,12 @@ const Chat = () => {
     { sender: 'Friend', text: 'I\'m good! How about you?' },
     { sender: 'Me', text: 'I\'m doing well, thanks!' },
   ]);
+  const [user,setUser]=useState(null)
+
+
+  const getTheSpecifiedUser=(data)=>{
+  setUser(data)
+  }
 
   const [newMessage, setNewMessage] = useState('');
 
@@ -15,12 +23,24 @@ const Chat = () => {
       setNewMessage('');
     }
   };
-
+const getMessage=async()=>{
+try {
+  const response=axios.get('http://localhost:4000/message')
+  console.log(response,"ress")
+} catch (error) {
+  console.log(error,"err")
+}
+}
   return (
-    <div className="chat-container  h-screen flex flex-col">
+   <div className='w-full flex'>   
+   <div>
+   <SidebarUsers fun={getTheSpecifiedUser}  />
+   </div>
+  
+    <div className="w-full h-screen flex flex-col">
       {/* Chat header */}
-      <div className="chat-header bg-green-500 p-4 text-white text-center font-bold">
-        Chat
+      <div className="chat-header bg-green-500 p-4 text-white text-center font-bold">   
+       {user?.username}
       </div>
 
       {/* Chat messages area */}
@@ -53,6 +73,7 @@ const Chat = () => {
           Send
         </button>
       </div>
+    </div>
     </div>
   );
 };
